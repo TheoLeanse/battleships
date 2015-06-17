@@ -11,19 +11,19 @@ describe Board do
     expect(subject.grid[1]).to eq('unoccupied')
   end
 
-  it "responds to #place with three arguments" do
-    expect(subject).to respond_to(:place).with(3).arguments
-  end
-
   it "responds to #cell_occupied?" do
     expect(subject).to respond_to(:cell_occupied?)
+  end
+
+  it "has a #place method taking three arguments" do
+    expect(subject).to respond_to(:place).with(3).arguments
   end
 
   it "checks that a given location is on the board" do
     expect(subject.grid.keys).to include 1
   end
 
-  it 'responds to create' do
+  it 'has a #create_grid method' do
     expect(subject).to respond_to(:create_grid).with(1).argument
   end
 
@@ -151,6 +151,11 @@ describe Board do
         expect(board.grid[1]).to eq ship
       end
 
+      it 'raises an error when trying to place a ship out of bounds (northward)' do
+        board = Board.new
+        ship = double :ship, size: 5
+        expect { board.place(ship, 31, :north) }.to raise_error "Ship cannot be placed here"
+      end
     end
   end
 end

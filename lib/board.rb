@@ -10,7 +10,7 @@ class Board
   end
 
   def create_grid(length)
-    grid_scaffold = Hash.new
+    grid_scaffold = Hash.new # create deafult value with error - if call a method that's off the board?
     (length**2).times { |index| grid_scaffold[index + 1] = 'unoccupied' }
     grid_scaffold
   end
@@ -71,6 +71,7 @@ class Board
   end
 
   def north(ship, cell)
+    fail 'Ship cannot be placed here' if ship.size > (cell / 10) + 1
     # needs a test here
     i = 1
     j = -10
