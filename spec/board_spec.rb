@@ -164,6 +164,15 @@ describe Board do
         expect(subject.all_sunk?).to eq(true)
       end
     end
+    context 'when not all ships are sunk' do
+      it 'registers that not all ships are sunk' do
+        ship = Ship.new 5 #double :ship, size:5, sunk?: true
+        ship2 = Ship.new 5 #double :ship, size:5, sunk?: false
+        subject.place(ship, 1, :east)
+        subject.place(ship2, 11, :east)
+        expect(subject.all_sunk?).to eq(false)
+      end
+    end
 
 
   end
