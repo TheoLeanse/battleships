@@ -11,4 +11,8 @@ class Player
   def fire(cell)
     opponent.hit(cell)
   end
+
+  def hit(cell)
+    @board.hit(cell)
+  end
 end
