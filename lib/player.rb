@@ -1,4 +1,5 @@
 class Player
+  attr_accessor :opponent
   def initialize (board)
     @board = board
   end
