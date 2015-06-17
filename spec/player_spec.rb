@@ -1,16 +1,23 @@
 require 'player'
 
 describe Player do
-  subject { Player.new double :board, place_ship: nil }
+  let(:board) { double :board, place: nil }
+  subject { Player.new board }
   let(:ship) { double :ship }
-  let(:board) { double :board }
+
+  it 'has an opponent' do
+    expect(subject).to respond_to(:opponent)
+  end
+
+
   it 'can instruct ships to be placed on the board' do
-    expect(board).to receive(:place_ship)
+    expect(board).to receive(:place)
     subject.place_ship(ship, 1, :east)
   end
 
-  xit 'can instruct cells to be fired on' do
-
+  xit 'can instruct cells to be fired on opponent board' do
+    # expect(board).to receive(:hit)
+    # subject.fire(2)
   end
 
   xit 'can only send message to board on a players turn' do

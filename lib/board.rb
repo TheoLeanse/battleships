@@ -1,4 +1,5 @@
 require_relative './ship'
+require_relative './player'
 
 class Board
   attr_reader :grid, :hits, :misses, :row_size

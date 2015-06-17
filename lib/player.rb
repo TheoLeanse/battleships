@@ -3,8 +3,7 @@ class Player
     @board = board
   end
 
-  def row_size
-    board.row_size
+  def place_ship(ship, cell, direction)
+    @board.place(ship, cell, direction)
   end
-
 end
