@@ -21,8 +21,9 @@ describe Player do
     subject.fire(2)
   end
 
-  xit 'can receive a hit from opponent and send it to its board' do
-
+  it 'can tell the board it has been hit' do
+    expect(board).to receive(:hit)
+    subject.hit(1)
   end
 
   xit 'can only send message to board on a players turn' do

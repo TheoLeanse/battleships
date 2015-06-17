@@ -7,4 +7,8 @@ class Player
   def place_ship(ship, cell, direction)
     @board.place(ship, cell, direction)
   end
+
+  def fire(cell)
+    opponent.hit(cell)
+  end
 end
