@@ -1,12 +1,13 @@
 require 'board'
 
+
 describe Board do
 
-  it "has a set of grid" do
+  it "has a grid" do
     expect(subject).to respond_to(:grid)
   end
 
-  it "recalls whether a spot is occupied" do
+  it "knows if a cell of the grid is occupied" do
     expect(subject.grid[1]).to eq('unoccupied')
   end
 
@@ -34,64 +35,61 @@ describe Board do
     expect(subject).to respond_to(:hits)
   end
 
+
   describe 'hit' do
 
-    it 'responds to hit' do
+    it 'can be called with one argument' do
       expect(subject).to respond_to(:hit).with(1).argument
     end
-
 
     it 'changes a ship status' do
       ship = double :ship , size: 1
       board = Board.new
       board.place(ship,1,:east)
-
       expect(ship).to receive :hit
       board.hit(1)
     end
 
-    it 'stores an array of hits' do
+    it 'adds to an array of hits' do
       ship = double :ship , size: 1, hit: true
       board = Board.new
       board.place(ship,1,:east)
-
       board.hit(1)
       expect(board.hits).to eq [1]
-
     end
 
-    it 'stores an array of misses' do
+    it 'adds to an array of misses' do
       subject.hit(1)
       expect(subject.misses).to eq [1]
     end
 
-    it 'throws an error if the guess is a repeat' do
-
+    it 'throws an error for repeated guesses' do
       subject.hit(1)
       expect { subject.hit(1) }.to raise_error "Invalid guess (cell has already been hit)"
-
     end
+
   end
 
 
-  describe 'create' do
+  describe 'create_grid' do
 
-    it 'creates a hash' do
+    it 'creates a hash containing each cell and its status' do
       hash = {1 => 'unoccupied', 2 => 'unoccupied', 3 => 'unoccupied', 4 => 'unoccupied'}
       expect(subject.create_grid(2)).to eq hash
     end
 
   end
 
+
   describe "cell_occupied?" do
 
-    it "responds true when space is occupied" do
+    it "returns true when a given cell is occupied" do
       ship = double :ship, size: 1
       subject.place(ship, 1, :east)
       expect(subject.cell_occupied? 1).to eq(true)
     end
 
-    it "responds false when space is unoccupied" do
+    it "returns false when a given cell is unoccupied" do
       expect(subject.cell_occupied? 1).to eq(false)
     end
 
@@ -100,33 +98,27 @@ describe Board do
 
   describe "#place" do
 
-
-
-    it "raises an error when placing a ship in an occupied space" do
+    it "raises an error if attempting to place a ship in an occupied space" do
       ship = double :ship, size: 1
       subject.place(ship, 1, :east)
       expect { subject.place(:ship, 1, :east) }.to raise_error 'Space is occupied'
     end
 
-    it "raises an error when placing a ship in a space that doesn't exist" do
+    it "raises an error if attempting to place a ship in a non-existent cell" do
       expect { subject.place(:ship, subject.grid.length + 1, :east) }.to raise_error 'Cannot place ships off the board'
     end
 
-    # it "raises an error if there are not enough grid available for the whole ship" do
-    #   bigship = double :bigship, size: subject.grid.count + 1
-    #   expect { subject.place(bigship, 1, :west) }.to raise_error "Ship cannot be placed here"
-    # end
 
-    context 'when given a ship of big size' do
+    context 'when given a ship of size greater than one' do
 
-      it 'places the same ship over multiple cells (east)' do
+      it 'places the ship over multiple cells (east)' do
         board = Board.new
         ship = double :ship, size: 2
         board.place(ship, 1, :east)
         expect(board.grid[2]).to eq ship
       end
 
-      it 'places the same ship over multiple cells (west)' do
+      it 'places the ship over multiple cells (west)' do
         board = Board.new
         ship = double :ship, size: 5
         board.place(ship, 5, :west)
@@ -147,11 +139,9 @@ describe Board do
       end
 
       it 'raises an error when trying to place a ship out of bounds (soutward)' do
-
         board = Board.new
         ship = double :ship, size: 5
         expect { board.place(ship, 61, :south) }.to raise_error "Ship cannot be placed here"
-
       end
 
       it 'places the same ship over multiple cells (north)' do
