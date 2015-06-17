@@ -35,7 +35,6 @@ describe Board do
     expect(subject).to respond_to(:hits)
   end
 
-
   describe 'hit' do
 
     it 'can be called with one argument' do
@@ -157,5 +156,15 @@ describe Board do
         expect { board.place(ship, 31, :north) }.to raise_error "Ship cannot be placed here"
       end
     end
+
+    context 'when all ships are sunk' do
+      it 'registers that all ships are sunk' do
+        ship = double :ship, size:5, sunk?: true
+        subject.place(ship, 1, :east)
+        expect(subject.all_sunk?).to eq(true)
+      end
+    end
+
+
   end
 end

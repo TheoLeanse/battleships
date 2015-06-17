@@ -15,4 +15,8 @@ class Player
   def hit(cell)
     @board.hit(cell)
   end
+
+  def all_sunk?
+    @board.all_sunk?
+  end
 end
