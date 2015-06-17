@@ -11,9 +11,7 @@ class Board
 
   def create_grid(length)
     grid_scaffold = Hash.new
-    (length**2).times do |index|
-      grid_scaffold[index + 1] = 'unoccupied'
-    end
+    (length**2).times { |index| grid_scaffold[index + 1] = 'unoccupied' }
     grid_scaffold
   end
 
