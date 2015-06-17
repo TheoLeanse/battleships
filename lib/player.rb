@@ -1,7 +1,10 @@
 class Player
+  def initialize (board)
+    @board = board
+  end
 
-  def board
-
+  def row_size
+    board.row_size
   end
 
 end

@@ -1,13 +1,24 @@
 require 'player'
 
 describe Player do
+  subject { Player.new double :board, place_ship: nil }
+  let(:ship) { double :ship }
+  let(:board) { double :board }
+  it 'can instruct ships to be placed on the board' do
+    expect(board).to receive(:place_ship)
+    subject.place_ship(ship, 1, :east)
+  end
 
-  it { is_expected.to respond_to(:board) }
+  xit 'can instruct cells to be fired on' do
 
-  describe '#board' do
-    it 'should be able to return a grid' do
-      expect(subject.board.row_size).to eq(10)
-    end 
+  end
+
+  xit 'can only send message to board on a players turn' do
+
+  end
+
+  xit 'is told when all its ships are sunk' do
+
   end
 
 end
