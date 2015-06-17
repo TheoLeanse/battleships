@@ -16,7 +16,7 @@ class Board
   end
 
   def place(ship, cell, direction)
-    fail 'Incorrect direction' unless Board.method_defined?(direction)
+    fail 'Incorrect direction' unless Board.private_method_defined?(direction)
     send(direction, ship, cell) if ship.size > 1
     check_space(cell)
     grid[cell] = ship
@@ -37,7 +37,7 @@ class Board
     end
   end
 
-  protected
+  private
   def east(ship, cell)
     fail 'Ship cannot be placed here' if ship.size > (row_size + 1) - cell % row_size
     i = 1
@@ -72,7 +72,6 @@ class Board
 
   def north(ship, cell)
     fail 'Ship cannot be placed here' if ship.size > (cell / 10) + 1
-    # needs a test here
     i = 1
     j = -10
     while i < ship.size
@@ -83,7 +82,7 @@ class Board
     end
   end
 
-  private
+  #private
   def check_space(cell)
     fail "Space is occupied" if cell_occupied?(cell)
     fail "Cannot place ships off the board" unless grid.keys.include?(cell)
