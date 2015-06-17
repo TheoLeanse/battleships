@@ -1,7 +1,7 @@
 require 'player'
 
 describe Player do
-  let(:board) { double :board, place: nil }
+  let(:board) { double :board, place: nil, all_sunk?: true }
   subject { Player.new board }
   let(:ship) { double :ship }
 
@@ -30,8 +30,9 @@ describe Player do
 
   end
 
-  xit 'is told when all its ships are sunk' do
-
+  it 'is told when all its ships are sunk' do
+    expect(board).to receive :all_sunk?
+    subject.all_sunk?
   end
 
 end

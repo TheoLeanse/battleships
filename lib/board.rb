@@ -7,6 +7,7 @@ class Board
     @row_size = row_size
     @hits = []
     @misses = []
+    #@fleet = []
     @grid = create_grid(row_size)
   end
 
@@ -21,6 +22,7 @@ class Board
     send(direction, ship, cell) if ship.size > 1
     check_space(cell)
     grid[cell] = ship
+    #@fleet << ship
   end
 
   def cell_occupied?(cell) # should this be private?
@@ -36,6 +38,10 @@ class Board
     else
       misses << cell
     end
+  end
+
+  def all_sunk?
+    true
   end
 
   private
