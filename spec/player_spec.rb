@@ -26,13 +26,16 @@ describe Player do
     subject.hit(1)
   end
 
-  xit 'can only send message to board on a players turn' do
-
-  end
-
   it 'is told when all its ships are sunk' do
     expect(board).to receive :all_sunk?
     subject.all_sunk?
   end
 
+  xit 'can only send message to board on a players turn' do
+
+  end
+
+  xit "only allows a player to place the correct number and sizes of ship" do
+    # Good implementation?
+  end
 end

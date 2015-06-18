@@ -24,7 +24,7 @@ describe Board do
   end
 
   it 'has a #create_grid method' do
-    expect(subject).to respond_to(:create_grid).with(1).argument
+    expect(subject).to respond_to(:create_grid)
   end
 
   it 'responds to misses' do
@@ -73,8 +73,9 @@ describe Board do
   describe 'create_grid' do
 
     it 'creates a hash containing each cell and its status' do
+      littleboard = Board.new(2)
       hash = {1 => 'unoccupied', 2 => 'unoccupied', 3 => 'unoccupied', 4 => 'unoccupied'}
-      expect(subject.create_grid(2)).to eq hash
+      expect(littleboard.create_grid).to eq hash
     end
 
   end
